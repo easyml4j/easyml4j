@@ -1,4 +1,4 @@
-package org.easyml4j.utils;
+package org.easyml4j.util;
 
 /**
  * 计算距离
