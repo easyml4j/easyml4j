@@ -1,7 +1,8 @@
 package org.easyml4j.metric;
 
+import org.easyml4j.exception.DataException;
+import org.easyml4j.util.Check;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 
 /**
  * 回归评价指标
@@ -13,34 +14,90 @@ public class RegressionMetric extends Metric {
     /**
      * 均方误差
      *
-     * @param yTrue        真实的y值，(nSamples,)或(nSamples, nOutputs)
-     * @param yPred        预测的y值，和yTrue维度一致
-     * @param sampleWeight 样本权重，(nSamples,)，为null时表示权重相等
-     * @param multiOutput  TODO: 具体作用是什么
+     * @param yTrue 真实的y值，(nSamples,)
+     * @param yPred 预测的y值，和yTrue维度一致
      */
-    public static Double meanSquaredError(INDArray yTrue,
-                                          INDArray yPred,
-                                          INDArray sampleWeight,
-                                          String multiOutput) {
+    public static Double meanSquaredError(INDArray yTrue, INDArray yPred) throws DataException {
+        Check.checkConsistentLength(yTrue, yPred);
         INDArray yTrueSubPred = yTrue.sub(yPred);
         return yTrueSubPred.muli(yTrueSubPred).mean().getDouble(0);
     }
 
-    public static void main(String[] args) {
-        INDArray x = Nd4j.zeros(3);
-        INDArray y = Nd4j.ones(3);
-        System.out.println(meanSquaredError(x, y, null, null));
-
-//        // 数组的轴数（维度）。
-//        int dimensions = x.rank();
-//
-//        // 数组的维数。每个维度的大小。
-//        long[] shape = x.shape();
-//
-//        // 元素的总数。
-//        long length = x.length();
-//
-//        // 数组元素的类型。
-//        DataType dt = x.dataType();
+    /**
+     * TODO(ysl): 实现maxError（参考sklearn -> metrics -> _regression -> def max_error）并完成文档
+     */
+    public static Double maxError(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
     }
+
+    /**
+     * TODO(ysl): 实现meanAbsoluteError
+     */
+    public static Double meanAbsoluteError(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
+    }
+
+    /**
+     * TODO(ysl): 实现meanSquaredLogError
+     */
+    public static Double meanSquaredLogError(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
+    }
+
+    /**
+     * TODO(ysl): 实现medianAbsoluteError
+     */
+    public static Double medianAbsoluteError(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
+    }
+
+    /**
+     * TODO(ysl): 实现meanAbsolutePercentageError
+     */
+    public static Double meanAbsolutePercentageError(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
+    }
+
+    /**
+     * TODO(ysl): 实现meanPinballLoss
+     */
+    public static Double meanPinballLoss(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
+    }
+
+    /**
+     * TODO(ysl): 实现r2Score
+     */
+    public static Double r2Score(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
+    }
+
+    /**
+     * TODO(ysl): 实现explainedVarianceScore
+     */
+    public static Double explainedVarianceScore(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
+    }
+
+    /**
+     * TODO(ysl): 实现explainedVarianceScore
+     */
+    public static Double meanTweedieDeviance(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
+    }
+
+    /**
+     * TODO(ysl): 实现meanPoissonDeviance
+     */
+    public static Double meanPoissonDeviance(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
+    }
+
+    /**
+     * TODO(ysl): 实现meanGammaDeviance
+     */
+    public static Double meanGammaDeviance(INDArray yTrue, INDArray yPred) throws DataException {
+        return null;
+    }
+
 }
